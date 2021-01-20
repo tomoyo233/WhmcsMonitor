@@ -6,7 +6,7 @@ header = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/
 # 修改字符串为监控地址
 url = 'https://www.anlancloud.com/cart.php?a=add&pid=1'
 # 修改字符串为whmcs默认语言的无货显示字符
-outstak = '缺货'
+outstock = '缺货'
 #在有货时继续进行监控 True or False
 continuous = True
 # 监控时间间隔
@@ -25,7 +25,7 @@ def tg_bot(bottoken, chatid, url):
 
 while True:
     response = requests.get(url=url, headers=header)
-    if outstak.encode('UTF-8') in response.content:
+    if outstock.encode('UTF-8') in response.content:
         print('现在时间：{t}\n商品地址：{u}\n状态：无货\n将在{s}秒后进行下一次检查'.format(t=time.strftime('%H:%M:%S'), s=sleep,u=url))
         print("*" * 30)
         time.sleep(sleep)
