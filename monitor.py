@@ -3,10 +3,10 @@ from urllib.parse import quote
 import requests
 
 header = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'}
-# 修改字符串为监控地址
-url = 'https://www.anlancloud.com/cart.php?a=add&pid=1'
-# 修改字符串为whmcs默认语言的无货显示字符
-outstock = '缺货'
+# 修改字符串为监控地址,由于默认语言的不同，可以通过网址追加&language=english进行英语显示
+url = 'https://www.anlancloud.com/cart.php?a=add&pid=1&language=english'
+# 修改字符串为whmcs默认语言的无货显示字符,英语:'Out of Stock' 
+outstock = 'Out of Stock'
 #在有货时继续进行监控 True or False
 continuous = True
 # 监控时间间隔
