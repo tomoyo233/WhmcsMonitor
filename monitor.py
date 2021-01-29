@@ -24,19 +24,27 @@ def tg_bot(bottoken, chatid, url):
 
 
 while True:
-    response = requests.get(url=url, headers=header)
-    if outstock.encode('UTF-8') in response.content:
-        print('现在时间：{t}\n商品地址：{u}\n状态：无货\n将在{s}秒后进行下一次检查'.format(t=time.strftime('%H:%M:%S'), s=sleep,u=url))
+    try:
+        response = requests.get(url=url, headers=header)
+    except Exception as error:
+        print('网站状态异常，休眠{}秒'.format(sleep))
+        print(error)
         print("*" * 30)
         time.sleep(sleep)
     else:
-        print('上货了!!!买买买!!!')
-        print('现在时间：{t}\n商品地址：{u}\n状态：有货'.format(t=time.strftime('%H:%M:%S'),u=url))
-        print("*" * 30)
-        tg_bot(bottoken, chatid, url)
-        if continuous:
-            print('商品有货，程序将进行一小时的休眠')
-            time.sleep(3600)
+        if outstak.encode('UTF-8') in response.content:
+            print('现在时间：{t}\n商品地址：{u}\n状态：无货\n将在{s}秒后进行下一次检查'.format(t=time.strftime('%H:%M:%S'), s=sleep,u=url))
+            print("*" * 30)
+            time.sleep(sleep)
         else:
-            print('程序结束')
-            break
+            print('上货了!!!买买买!!!')
+            print('现在时间：{t}\n商品地址：{u}\n状态：有货'.format(t=time.strftime('%H:%M:%S'),u=url))
+            print("*" * 30)
+            tg_bot(bottoken, chatid, url)
+            if continuous:
+                print('商品有货，程序将进行一小时的休眠')
+                time.sleep(3600)
+            else:
+                print('程序结束')
+                break
+
